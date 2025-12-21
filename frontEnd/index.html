@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StartBoost - Gestão de Startups</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>🚀 StartBoost Dashboard</h1>
+    </header>
+
+    <main>
+      <section id="cadastro-startup">
+        <h2>Gestão de Startup</h2>
+        <form id="form-startup">
+          <input type="hidden" id="startup-id" />
+
+          <div class="input-group">
+            <input
+              type="text"
+              id="nome"
+              placeholder="Nome da Startup"
+              required
+            />
+            <input type="text" id="cnpj" placeholder="CNPJ" required />
+            <input
+              type="text"
+              id="setor"
+              placeholder="Setor (ex: Fintech)"
+              required
+            />
+            <input
+              type="text"
+              id="fase"
+              placeholder="Fase (ex: Escala)"
+              required
+            />
+            <input
+              type="date"
+              id="data"
+              title="Data de Investimento"
+              required
+            />
+            <input
+              type="number"
+              id="valor"
+              placeholder="Valor Investido"
+              step="0.01"
+              required
+            />
+            <input
+              type="number"
+              id="id_gerente"
+              placeholder="ID do Gerente"
+              required
+            />
+          </div>
+
+          <div class="botoes-form">
+            <button type="submit" id="btn-salvar">Salvar Startup</button>
+            <button
+              type="button"
+              id="btn-cancelar"
+              style="display: none"
+              onclick="limparFormulario()"
+            >
+              Cancelar Edição
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <hr />
+
+      <section id="startup-list">
+        <h2>Lista de Startups</h2>
+        <table id="tabela-startups">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Setor</th>
+              <th>Fase</th>
+              <th>Valor Investido</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="startup-table-body"></tbody>
+        </table>
+      </section>
+      <hr />
+
+      <section id="gestao-kpis">
+        <h2>Registar Desempenho Mensal (KPIs)</h2>
+        <form id="form-kpi">
+          <div class="input-group">
+            <select id="kpi-id-startup" required>
+              <option value="">Selecione a Startup...</option>
+            </select>
+
+            <input
+              type="date"
+              id="kpi-mes"
+              title="Mês de Referência"
+              required
+            />
+            <input
+              type="number"
+              id="kpi-faturamento"
+              placeholder="Faturamento Mensal"
+              step="0.01"
+              required
+            />
+            <input
+              type="number"
+              id="kpi-usuarios"
+              placeholder="Usuários Ativos"
+              required
+            />
+            <input
+              type="number"
+              id="kpi-churn"
+              placeholder="Churn Rate (%)"
+              step="0.1"
+              required
+            />
+          </div>
+          <button type="submit">Registar KPI</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="startups.js"></script>
+    <script src="kpis.js"></script>
+  </body>
+</html>
