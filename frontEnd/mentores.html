@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StartBoost - Procurar Mentores</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>👨‍🏫 Encontre Mentores StartBoost</h1>
+        <nav>
+            <a href="index.html" class="btn-nav"><i class="fas fa-home"></i> Voltar ao Dashboard</a>
+            <a href="relatorios.html" class="btn-nav"><i class="fas fa-chart-pie"></i> Ver Relatórios</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Seção de Busca -->
+        <section id="busca-mentores" class="section-card">
+            <h2><i class="fas fa-search"></i> Procurar Mentores por Especialidade</h2>
+            <p class="section-subtitle">Encontre mentores especializados para acelerar o crescimento da sua startup</p>
+            
+            <div class="search-container">
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="input-especialidade" 
+                        placeholder="Ex: Marketing Digital, Finanças, Tecnologia, Gestão..." 
+                        class="search-input"
+                    >
+                    <button onclick="buscarMentores()" class="btn-search">
+                        <i class="fas fa-search"></i> Pesquisar
+                    </button>
+                </div>
+                
+                <div class="search-tags">
+                    <span class="tag-label">Buscar por:</span>
+                    <button class="tag" onclick="filtrarPorTag('Marketing')">Marketing</button>
+                    <button class="tag" onclick="filtrarPorTag('Finanças')">Finanças</button>
+                    <button class="tag" onclick="filtrarPorTag('Tecnologia')">Tecnologia</button>
+                    <button class="tag" onclick="filtrarPorTag('Gestão')">Gestão</button>
+                    <button class="tag" onclick="filtrarPorTag('Vendas')">Vendas</button>
+                    <button class="tag" onclick="filtrarPorTag('Produto')">Produto</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resultados da Busca -->
+        <section id="resultado-mentores" class="section-card">
+            <h2><i class="fas fa-users"></i> Mentores Encontrados</h2>
+            <div class="results-info">
+                <span id="contador-resultados" class="badge">0 mentores encontrados</span>
+                <button onclick="limparBusca()" class="btn-clear">
+                    <i class="fas fa-times"></i> Limpar Busca
+                </button>
+            </div>
+            
+            <div id="lista-mentores" class="mentores-grid">
+                <!-- Os mentores serão carregados dinamicamente aqui -->
+                <div class="empty-state">
+                    <i class="fas fa-search fa-3x"></i>
+                    <h3>Busque por mentores</h3>
+                    <p>Digite uma especialidade ou clique em uma das tags acima para começar</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Todos os Mentores -->
+        <section id="todos-mentores" class="section-card">
+            <h2><i class="fas fa-star"></i> Nossos Mentores Destacados</h2>
+            <div class="mentores-grid" id="grid-todos-mentores">
+                <!-- Mentores em destaque serão carregados aqui -->
+            </div>
+        </section>
+    </main>
+
+    <script src="mentores.js"></script>
+</body>
+</html>

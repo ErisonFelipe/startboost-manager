@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>StartBoost - Relatórios de Performance</title>
+   
+     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>📊 Relatórios <span>StartBoost</span></h1>
+        <nav>
+            <a href="index.html" class="btn-nav"><i class="fas fa-home"></i> Voltar ao Dashboard</a>
+            <a href="mentores.html" class="btn-nav"><i class="fas fa-users"></i> Encontrar Mentores</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="toolbar">
+            <button class="btn-report" onclick="gerarRelatorioAtraso()">
+                <i class="fas fa-clock"></i> Startups Atrasadas (>30 dias)
+            </button>
+            <button class="btn-report" onclick="gerarRelatorioPerformance()">
+                <i class="fas fa-chart-line"></i> Ranking por Valor Investido
+            </button>
+        </section>
+
+        <section id="resultado-relatorio">
+            <h2 id="titulo-relatorio">Selecione um relatório acima</h2>
+            <table id="tabela-relatorios">
+                <thead>
+                    <tr id="cabecalho-tabela">
+                        </tr>
+                </thead>
+                <tbody id="corpo-relatorio">
+                    </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="relatorios.js"></script>
+</body>
+</html>
