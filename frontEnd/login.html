@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - StartBoost</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-rocket"></i> StartBoost Pro</h1>
+        <nav>
+            <a href="index.html" class="btn-nav">
+                <i class="fas fa-home"></i> Voltar ao Início
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section-card" style="max-width: 500px; margin: 2rem auto;">
+            <h2><i class="fas fa-lock"></i> Acesso Restrito</h2>
+            <p class="section-subtitle" style="text-align: center; margin-bottom: 2rem;">
+                Área Administrativa - Sistema de Gestão de Startups
+            </p>
+
+            <form id="form-login" style="margin-top: 2rem;">
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div class="input-field">
+                        <label for="login-email" style="display: block; margin-bottom: 8px; color: var(--gray-800); font-weight: 500;">
+                            <i class="fas fa-envelope"></i> E-mail do Administrador
+                        </label>
+                        <input 
+                            type="email" 
+                            id="login-email" 
+                            placeholder="seu.email@startboost.com" 
+                            required
+                            style="width: 100%; padding: 16px 20px; border: 2px solid var(--gray-200); border-radius: var(--radius-md); font-size: 1rem; transition: var(--transition);"
+                            class="login-input"
+                        >
+                    </div>
+
+                    <div class="input-field">
+                        <label for="login-senha" style="display: block; margin-bottom: 8px; color: var(--gray-800); font-weight: 500;">
+                            <i class="fas fa-key"></i> Senha
+                        </label>
+                        <input 
+                            type="password" 
+                            id="login-senha" 
+                            placeholder="••••••••" 
+                            required
+                            style="width: 100%; padding: 16px 20px; border: 2px solid var(--gray-200); border-radius: var(--radius-md); font-size: 1rem; transition: var(--transition);"
+                            class="login-input"
+                        >
+                    </div>
+
+                    <div style="margin-top: 1rem;">
+                        <button 
+                            type="submit" 
+                            id="btn-entrar"
+                            style="width: 100%; padding: 18px; background: var(--gradient-primary); color: white; border: none; border-radius: var(--radius-md); font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px;"
+                        >
+                            <i class="fas fa-sign-in-alt"></i> Entrar no Sistema
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid var(--gray-200); text-align: center;">
+                <p style="color: var(--gray-600); margin-bottom: 1rem;">
+                    <i class="fas fa-info-circle"></i> Acesso restrito a administradores autorizados
+                </p>
+                
+                <div class="stats-cards" style="grid-template-columns: 1fr; gap: 1rem; margin-top: 1.5rem;">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: var(--gradient-primary);">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Segurança</h3>
+                            <p style="color: var(--gray-600); font-size: 0.9rem;">Sistema protegido com criptografia avançada</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p id="mensagem-erro" style="color: var(--danger); text-align: center; margin-top: 1.5rem; padding: 1rem; background: rgba(249, 65, 68, 0.1); border-radius: var(--radius-md); display: none;"></p>
+        </section>
+    </main>
+
+    <script src="login.js">
+       
+        // Simulação de login
+        document.getElementById('form-login').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const senha = document.getElementById('login-senha').value;
+            const mensagemErro = document.getElementById('mensagem-erro');
+            
+            // Simulação de credenciais (em um sistema real, isso seria verificado no backend)
+            const credenciaisValidas = email === "admin@startboost.com" && senha === "admin123";
+            
+            if (credenciaisValidas) {
+                mensagemErro.style.display = 'none';
+                mensagemErro.textContent = '';
+                
+               
+                
+                // Simular redirecionamento
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            } else {
+                mensagemErro.textContent = 'E-mail ou senha incorretos. Tente novamente.';
+                mensagemErro.style.display = 'block';
+                
+                // Efeito de erro
+                document.querySelectorAll('.login-input').forEach(input => {
+                    input.style.borderColor = 'var(--danger)';
+                    input.style.animation = 'shake 0.5s';
+                });
+                
+                setTimeout(() => {
+                    document.querySelectorAll('.login-input').forEach(input => {
+                        input.style.animation = '';
+                    });
+                }, 500);
+            }
+        });            
+    </script>
+</body>
+</html>

@@ -1,4 +1,10 @@
 // startups.js
+(function() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = 'login.html'; // Se não tem token, manda pro login
+    }
+})();
 
 // 1. Função para carregar e exibir as startups na tabela
 async function carregarStartups() {
@@ -76,10 +82,23 @@ form.addEventListener('submit', async (e) => {
 
 // 3. Funções Auxiliares para Startups
 async function deletarStartup(id) {
-    if (confirm('Tem certeza que deseja excluir esta startup?')) {
-        await fetch(`http://localhost:3000/startups/${id}`, { method: 'DELETE' });
-        carregarStartups();
-        atualizarDropdownStartups(); // Atualiza o dropdown após exclusão
+    const token = localStorage.getItem('token'); // Recupera o token
+
+    if (confirm('Deseja excluir?')) {
+        const resposta = await fetch(`http://localhost:3000/startups/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}` // ENVIA O TOKEN AQUI
+            }
+        });
+
+        if (resposta.status === 401 || resposta.status === 403) {
+            alert("Sessão expirada. Faça login novamente.");
+            window.location.href = 'login.html';
+            return;
+        }
+
+        if (resposta.ok) carregarStartups();
     }
 }
 
@@ -123,6 +142,27 @@ async function atualizarDropdownStartups() {
         console.error('Erro ao carregar startups para o select:', erro);
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const nome = localStorage.getItem('usuarioNome');
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    if (nome) {
+        document.getElementById('nome-usuario-logado').innerText = `Olá, ${nome}`;
+    }
+
+    // Configurar o botão de Logout
+    document.getElementById('btn-logout').addEventListener('click', () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('usuarioNome');
+        window.location.href = 'login.html';
+    });
+});
 
 // Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', () => {

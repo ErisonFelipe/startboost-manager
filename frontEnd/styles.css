@@ -53,11 +53,16 @@ body {
 header {
     background: var(--gradient-dashboard);
     color: white;
-    padding: 2rem 5%;
+    padding: 2rem 5% 3rem 5%;
     position: relative;
     overflow: hidden;
     box-shadow: var(--shadow-lg);
     text-align: center;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 header::before {
@@ -73,7 +78,7 @@ header::before {
 header h1 {
     font-size: 2.8rem;
     font-weight: 800;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     position: relative;
     z-index: 1;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
@@ -81,6 +86,7 @@ header h1 {
     align-items: center;
     justify-content: center;
     gap: 15px;
+    margin-top: 20px;
 }
 
 header h1::before {
@@ -102,10 +108,9 @@ header h1::before {
 nav {
     position: absolute;
     top: 20px;
-    right: 5%;
+    left: 5%;
     z-index: 2;
 }
-
 .btn-nav {
     text-decoration: none;
     background: rgba(255, 255, 255, 0.15);
@@ -491,6 +496,11 @@ hr::before {
 
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 1024px) {
+     header {
+        padding: 1.5rem 5% 2rem 5%;
+        min-height: 160px;
+    }
+
     .input-group {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -498,9 +508,11 @@ hr::before {
     nav {
         position: relative;
         top: 0;
-        right: 0;
-        text-align: center;
+        left: 0;
         margin-bottom: 1rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
     
     header h1 {
@@ -508,15 +520,81 @@ hr::before {
         flex-direction: column;
         gap: 10px;
     }
+
+    .user-controls {
+        position: relative;
+        top: 0;
+        right: 0;
+        justify-content: center;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        width: 100%;
+        max-width: 100%;
+    }
+
+     /* Quando ambos existem em telas menores */
+    header:has(nav):has(.user-controls) {
+        padding-top: 1.5rem;
+    }
+    
+    header:has(nav):has(.user-controls) h1 {
+        margin-top: 0;
+        order: 1;
+    }
+    
+    header:has(nav):has(.user-controls) nav {
+        order: 2;
+        margin: 1rem 0;
+    }
+    
+    header:has(nav):has(.user-controls) .user-controls {
+        order: 3;
+        margin-top: 0;
+    }
 }
 
 @media (max-width: 768px) {
+  header {
+        padding: 1rem 5% 1.5rem 5%;
+        min-height: auto;
+    }
+
     .input-group {
         grid-template-columns: 1fr;
     }
     
-    header h1 {
-        font-size: 1.8rem;
+   header h1 {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 0;
+    }
+
+    .user-controls {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 1rem;
+    }
+
+    .user-info {
+        order: 2;
+        width: 100%;
+        justify-content: center;
+    }
+
+      #btn-logout {
+        order: 1;
+        width: 100%;
+        justify-content: center;
+    }
+
+     nav {
+        margin-bottom: 1rem;
+    }
+
+      .btn-nav {
+        width: 100%;
+        justify-content: center;
     }
     
     section {
@@ -549,15 +627,33 @@ hr::before {
         padding: 1rem;
     }
     
-    header {
-        padding: 1.5rem 5%;
+     header {
+        padding: 0.5rem 5% 1rem 5%;
+    }
+
+        header h1 {
+        font-size: 1.6rem;
+    }
+    
+    .user-controls {
+        gap: 8px;
+    }
+    
+    .user-info {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    
+    #btn-logout {
+        padding: 10px 20px;
+        font-size: 0.9rem;
     }
     
     section h2 {
         font-size: 1.5rem;
     }
     
-    .btn-nav {
+     .btn-nav {
         padding: 10px 20px;
         font-size: 0.9rem;
     }
@@ -1517,6 +1613,150 @@ button:active {
     min-width: 24px;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.user-controls {
+    position: absolute;
+    top: 20px;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 2;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: 400px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.user-info:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.user-info i {
+    font-size: 1.5rem;
+}
+
+.user-info span {
+    font-size: 1rem;
+}
+
+/* Botão de Logout */
+#btn-logout {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+#btn-logout::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+}
+
+#btn-logout:hover::before {
+    left: 100%;
+}
+
+#btn-logout:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+#btn-logout i {
+    font-size: 1.1em;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .user-controls {
+        position: relative;
+        top: 0;
+        right: 0;
+        justify-content: center;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .user-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .user-info {
+        order: 2;
+    }
+    
+    #btn-logout {
+        order: 1;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Ajuste para quando ambos nav e user-controls existirem */
+nav + .user-controls {
+    right: 5%;
+    left: auto;
+}
+
+/* Se não tiver nav, centralize os user-controls */
+header:not(:has(nav)) .user-controls {
+    left: 5%;
+    right: 5%;
+    justify-content: center;
+    top: auto;
+    bottom: 20px;
+    position: relative;
+    margin-top: 1rem;
+}
+
+/* Se tiver ambos nav e user-controls no header */
+header:has(nav):has(.user-controls) {
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+}
+
+header:has(nav):has(.user-controls) h1 {
+    margin-top: 30px;
 }
 
 /* Remove o relatorios.css separado */
